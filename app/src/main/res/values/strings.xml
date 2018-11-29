@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">UdacityInventoryApp</string>
+    <string name="button_text">Enter Inventory</string>
+    <string name="dummy_string">Placeholder String</string>
+    <string name="enter_product_name">Enter Product Name</string>
+    <string name="enter_number_of_items">Enter Amount</string>
+    <string name="enter_price_of_product">Enter Price</string>
+    <string name="enter_supplier_name">Enter the Supplier Name</string>
+    <string name="enter_supplier_phone_number">Enter the Supplier Phone Number</string>
+    <string name="type_diet">Diet</string>
+    <string name="type_regular">Regular</string>
+    <string name="type_not_applicable">N/A</string>
+    <string name="action_delete_all_entries">Delete All Entries</string>
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+</resources>
