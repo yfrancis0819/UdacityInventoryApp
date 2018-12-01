@@ -1,28 +1,34 @@
 package com.example.android.udacityinventoryapp;
-
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
+import com.example.android.udacityinventoryapp.Data.InventoryContract;
 import com.example.android.udacityinventoryapp.Data.InventoryContract.InventoryEntry;
+import android.app.LoaderManager;
 
-import com.example.android.udacityinventoryapp.Data.InventoryDbHelper;
-
-public class InventoryActivity extends AppCompatActivity {
-
-    private InventoryDbHelper mDbHelper;
+public class InventoryActivity  extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<Cursor>{
+    InventoryCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
+
 
         //**Set up a button to open the editor activity*/
 
@@ -34,84 +40,27 @@ public class InventoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        mDbHelper = new InventoryDbHelper(this);
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        displayDatabaseInfo();
-    }
 
-    private void displayDatabaseInfo() {
+        ListView inventoryListView = (ListView) findViewById(R.id.list_view_inventory);
+        View emptyView = findViewById(R.id.empty_view);
+        inventoryListView.setEmptyView(emptyView);
+        mCursorAdapter = new InventoryCursorAdapter ( this, null );
+        inventoryListView.setAdapter ( mCursorAdapter );
 
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-        String[] projection = {
-                InventoryEntry._ID,
-                InventoryEntry.COLUMN_ITEM_NAME,
-                InventoryEntry.COLUMN_ITEM_PRICE,
-                InventoryEntry.COLUMN_ITEM_QUANTITY,
-                InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME,
-                InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER};
-
-
-        // Perform a query on the pets table
-        Cursor cursor = db.query(
-                InventoryEntry.TABLE_NAME,   // The table to query
-                projection,            // The columns to return
-                null,                  // The columns for the WHERE clause
-                null,                  // The values for the WHERE clause
-                null,                  // Don't group the rows
-                null,                  // Don't filter by row groups
-                null);                   // The sort order
-
-        TextView displayView = (TextView) findViewById(R.id.text_view_inventory);
-        try {
-
-            displayView.setText("The inventory table contains " + cursor.getCount() + " items.\n\n");
-            displayView.append(InventoryEntry._ID + " - " +
-                    InventoryEntry.COLUMN_ITEM_NAME + " - " +
-                    InventoryEntry.COLUMN_ITEM_PRICE + " - " +
-                    InventoryEntry.COLUMN_ITEM_QUANTITY + " - " +
-                    InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME + "-" +
-                    InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER +"\n");
-
-            int idColumnIndex = cursor.getColumnIndex(InventoryEntry._ID);
-            int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_NAME);
-            int breedColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_PRICE);
-            int genderColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_QUANTITY);
-            int weightColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME);
-            int supplierPhoneColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER);
-
-            while (cursor.moveToNext()) {
-                int currentID = cursor.getInt(idColumnIndex);
-
-                String currentName = cursor.getString(nameColumnIndex);
-                String currentPrice = cursor.getString(breedColumnIndex);
-                int currentQuantity = cursor.getInt(genderColumnIndex);
-                int currentSupplierName = cursor.getInt(weightColumnIndex);
-                String currentSupplierPhone = cursor.getString(supplierPhoneColumnIndex);
-
-                displayView.append(("\n" + currentID + " - " +
-                        currentName + " - " +
-                        currentPrice + " - " +
-                        currentQuantity + " - " +
-                        currentSupplierName + "-" +
-                        currentSupplierPhone));
+        inventoryListView.setOnItemClickListener( new AdapterView.OnItemClickListener () {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Uri currentItemUri = ContentUris.withAppendedId (InventoryEntry.CONTENT_URI, id );
+                Intent intent = new Intent (InventoryActivity.this, EditorActivity.class);
+                intent.setData(currentItemUri);
+                startActivity ( intent );
             }
-        } finally {
-            // Always close the cursor when you're done reading from it. This releases all its
-            // resources and makes it invalid.
-            cursor.close();
-        }
+        } );
+        getLoaderManager ().initLoader ( 0,
+                null, this);
     }
-
-    /**
-     * Helper method to insert hardcoded pet data into the database. For debugging purposes only.
-     */
 
     private void insertItem() {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
@@ -121,11 +70,18 @@ public class InventoryActivity extends AppCompatActivity {
         values.put(InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME, "Sam's");
         values.put(InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER, "732-956-9087");
 
-
-        long newRowID = db.insert(InventoryEntry.TABLE_NAME, null, values);
-
-
+        Uri newUri = getContentResolver().insert
+                (InventoryEntry.CONTENT_URI, values);
     }
+
+    private void deleteAllItems() {
+        int rowsDeleted =
+                getContentResolver().
+                        delete(InventoryContract.InventoryEntry.CONTENT_URI,
+                                null, null);
+        Log.v("Inventory Activity", rowsDeleted + " rows deleted from Inventory Database");
+    }
+
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.menu_inventory, menu);
@@ -135,17 +91,47 @@ public class InventoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected (MenuItem item){
 
         switch (item.getItemId()) {
-            // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
                 insertItem();
-                displayDatabaseInfo();
                 return true;
-            //Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-                // Do nothing for now
+                deleteAllItems();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+        }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+        String[] projection = {
+                InventoryContract.InventoryEntry._ID,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_NAME,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME,
+                InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER};
+
+        return new CursorLoader(this,
+                InventoryContract.InventoryEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
+
     }
 
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mCursorAdapter.swapCursor (data);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mCursorAdapter.swapCursor(null);
+    }
 }
+
+
+
+

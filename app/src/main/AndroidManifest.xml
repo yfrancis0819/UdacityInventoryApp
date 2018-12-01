@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".EditorActivity"
-            android:label="@string/action_save"
+            android:label="@string/action_editor_activity_add_item"
             android:theme="@style/EditorTheme"
             android:parentActivityName=".InventoryActivity" >>
 
@@ -30,6 +30,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".InventoryActivity" />
         </activity>
+
+        <provider
+            android:name=".Data.InventoryProvider"
+            android:authorities="com.example.android.udacityinventoryapp"
+            android:exported="false" />
     </application>
 
 </manifest>

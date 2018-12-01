@@ -1,17 +1,98 @@
 <resources>
     <string name="app_name">UdacityInventoryApp</string>
     <string name="button_text">Enter Inventory</string>
-    <string name="dummy_string">Placeholder String</string>
-    <string name="enter_product_name">Enter Product Name</string>
+    <string name="enter_item_name">Enter item Name</string>
     <string name="enter_number_of_items">Enter Amount</string>
-    <string name="enter_price_of_product">Enter Price</string>
+    <string name="enter_price_of_item">Enter Price</string>
     <string name="enter_supplier_name">Enter the Supplier Name</string>
     <string name="enter_supplier_phone_number">Enter the Supplier Phone Number</string>
-    <string name="type_diet">Diet</string>
-    <string name="type_regular">Regular</string>
-    <string name="type_not_applicable">N/A</string>
+
     <string name="action_delete_all_entries">Delete All Entries</string>
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="action_editor_activity_add_item">Add an Item</string>
+
+    <string name="empty_view_title_text">It\'s a bit lonely here...</string>
+
+    <string name="empty_view_subtitle_text">Get started by adding an item</string>
+
+    <string name="editor_activity_title_new_item">Add an item</string>
+
+    <string name="editor_insert_item_successful">Item saved</string>
+
+    <string name="editor_insert_item_failed">Error with saving item</string>
+
+    <string name="editor_activity_title_new_product">Add an item</string>
+
+    <string name="category_overview">Overview</string>
+
+    <string name="unit_dollar">$</string>
+
+    <string name="item">item</string>
+
+    <string name="save_error">Error saving Product</string>
+
+    <string name="item_saved_id">Product saved with row id:</string>
+
+    <string name="unsaved_changes_dialog_msg">Changes not Saved!</string>
+
+    <string name="discard">Discard!</string>
+
+    <string name="keep_editing">Keep Editing</string>
+
+    <string name="delete_dialog_msg">Delete Product</string>
+
+    <string name="editor_delete_item_failed">Error Deleting Item</string>
+
+    <string name="editor_delete_item_successful">Item Deleted Succesfully!</string>
+
+    <string name="delete_button">delete</string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="decrement">decrease</string>
+
+    <string name="increment">increase</string>
+
+    <string name="increment_button">add item</string>
+
+    <string name="category_supplier">Supplier</string>
+
+    <string name="contact_supplier">Call</string>
+
+    <string name="empty_name">Item Name cannot be blank.</string>
+
+    <string name="empty_phone">Phone Number cannot be blank.</string>
+
+    <string name="empty_price">Price cannot be blank.</string>
+
+    <string name="empty_quantity">Quantity cannot be blank.</string>
+
+    <string name="sale_item">Sell</string>
+
+    <string name="sale_button">Sale</string>
+
+    <string name="call_supplier">Call</string>
+
+    <string name="can_sell_yes">In Stock</string>
+
+    <string name="can_sell_no">Out of Stock</string>
+
+    <string name="category_available">Available in Stock</string>
+
+    <string name="no_stock">out of stock</string>
+
+    <string name="one_sold">sold 1 item</string>
+
+    <string name="sale_eror">error with sale</string>
+
+    <string name="error_saving">Error saving item</string>
+
+    <string name="item_saved">Item saved successfully</string>
+
+    <string name="empty_supplier">Supplier name missing</string>
+
+
 </resources>
