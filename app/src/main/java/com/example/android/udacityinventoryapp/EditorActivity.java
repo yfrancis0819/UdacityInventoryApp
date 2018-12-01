@@ -320,7 +320,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     InventoryContract.InventoryEntry._ID,
                     InventoryContract.InventoryEntry.COLUMN_ITEM_NAME,
                     InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY,
-                    InventoryContract.InventoryEntry.COLUMNS_ITEM_CAN_SELL,
+                    InventoryContract.InventoryEntry.COLUMN_ITEM_CAN_SELL,
                     InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE,
                     InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME,
                     InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER};
@@ -344,7 +344,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 // Find the columns of product attributes that we're interested in
                 int nameColumnIndex = cursor.getColumnIndex ( InventoryContract.InventoryEntry.COLUMN_ITEM_NAME );
                 int quantityColumnIndex = cursor.getColumnIndex ( InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY );
-                int canSellColumnIndex = cursor.getColumnIndex (InventoryContract.InventoryEntry.COLUMNS_ITEM_CAN_SELL );
+                int canSellColumnIndex = cursor.getColumnIndex (InventoryContract.InventoryEntry.COLUMN_ITEM_CAN_SELL );
                 int priceColumnIndex = cursor.getColumnIndex ( InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE );
                 int supplierColumnIndex = cursor.getColumnIndex ( InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME );
                 int phoneColumnIndex = cursor.getColumnIndex ( InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER );

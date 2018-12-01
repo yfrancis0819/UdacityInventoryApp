@@ -31,7 +31,7 @@ public class InventoryContract {
     public final static String COLUMN_ITEM_SUPPLIER_NAME = "Supplier_Name";
     public final static String COLUMN_ITEM_SUPPLIER_PHONE_NUMBER = "Supplier_Phone_Number";
 
-        public final static String COLUMNS_ITEM_CAN_SELL = "sell";
+        public final static String COLUMN_ITEM_CAN_SELL = "sell";
         public static final int CAN_SELL_UNKNOWN = 0;
         public static final int CAN_SELL_YES = 1;
         public static final int CAN_SELL_NO = 2;
