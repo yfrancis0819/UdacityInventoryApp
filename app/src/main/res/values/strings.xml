@@ -14,7 +14,7 @@
     <string name="edit_item">Edit Item</string>
     <string name="action_editor_activity_add_item">Add an Item</string>
 
-    <string name="empty_view_title_text">It\'s a bit lonely here...</string>
+    <string name="empty_view_title_text">Nothing to sell yet...</string>
 
     <string name="empty_view_subtitle_text">Get started by adding an item</string>
 
