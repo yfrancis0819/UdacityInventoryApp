@@ -254,10 +254,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             getMenuInflater ().inflate ( R.menu.menu_editor, menu );
             return true;
         }
-        /**
-         * This method is called after invalidateOptionsMenu(), so that the
-         * menu can be updated (some menu items can be hidden or made visible).
-         */
+
         @Override
         public boolean onPrepareOptionsMenu(Menu menu) {
             super.onPrepareOptionsMenu ( menu );
