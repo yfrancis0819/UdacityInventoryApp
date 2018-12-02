@@ -2,8 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="@dimen/activity_margin">
+    android:padding="@dimen/activity_margin"
+    tools:context=".EditorActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +34,7 @@
                 <EditText
                     android:id="@+id/edit_name"
                     style="@style/EditorFieldStyle"
-                    android:hint="@string/action_insert_dummy_data"
+                    android:hint="@string/enter_item_name"
                     android:inputType="textCapWords" />
 
             </LinearLayout>
@@ -46,7 +48,7 @@
 
             <TextView
                 style="@style/CategoryStyle"
-                android:text="@string/action_insert_dummy_data"/>
+                android:text="@string/enter_price_of_item"/>
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -79,7 +81,7 @@
 
             <TextView
                 style="@style/CategoryStyle"
-                android:text="@string/category_overview"/>
+                android:text="@string/category_quantity"/>
 
             <Button
                 android:id="@+id/decrement_button"
@@ -88,7 +90,8 @@
                 android:layout_marginLeft="@dimen/activity_large_margin"
                 android:layout_marginStart="@dimen/activity_large_margin"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
+                android:text="@string/delete_item"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/normalTextSize" />
 
             <LinearLayout
@@ -100,10 +103,11 @@
                 <EditText
                     android:id="@+id/edit_item_quantity"
                     style="@style/EditorFieldStyle"
-                    android:hint="@string/action_insert_dummy_data"
+                    android:hint="@string/enter_number_of_items"
                     android:layout_marginLeft="@dimen/quantity_margin"
                     android:layout_marginRight="@dimen/quantity_margin"
                     android:inputType="number"
+
                     android:maxLength="6" />
 
             </LinearLayout>
@@ -115,7 +119,8 @@
                 android:layout_marginEnd="@dimen/activity_medium_margin"
                 android:layout_marginRight="@dimen/activity_medium_margin"
                 android:textAlignment="center"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
+                android:text="@string/add_item"
                 android:textSize="@dimen/normalTextSize" />
         </LinearLayout>
 
@@ -141,7 +146,7 @@
                 <EditText
                     android:id="@+id/edit_supplier_name"
                     style="@style/EditorFieldStyle"
-                    android:hint="@string/action_insert_dummy_data"
+                    android:hint="@string/enter_supplier_name"
                     android:inputType="textCapWords" />
 
                 <EditText

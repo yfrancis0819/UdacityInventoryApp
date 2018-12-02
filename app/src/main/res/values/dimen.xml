@@ -3,8 +3,8 @@
     <dimen name="add_margin">16dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="layout_margin">4dp</dimen>
-    <dimen name="button_width">32dp</dimen>
-    <dimen name="button_height">32dp</dimen>
+    <dimen name="button_width">50dp</dimen>
+    <dimen name="button_height">50dp</dimen>
     <dimen name="normalTextSize">16sp</dimen>
     <dimen name="quantity_margin">24dp</dimen>
     <dimen name="product_item_height">96dp</dimen>

@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -80,9 +81,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (mCurrentItemUri == null) {
             setTitle ( getString ( R.string.editor_activity_title_new_product ) );
-            invalidateOptionsMenu ();
+
         } else {
-            setTitle ( getString ( R.string.edit_item ) );
+            setTitle (getString ( R.string.edit_item ) );
+
 
 
             getLoaderManager ().initLoader ( EXISTING_ITEM_LOADER, null,  this);
@@ -247,23 +249,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // Inflate the menu options from the res/menu/menu_editor.xml file.
-            // This adds menu items to the app bar.
-            getMenuInflater ().inflate ( R.menu.menu_editor, menu );
-            return true;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-        @Override
-        public boolean onPrepareOptionsMenu(Menu menu) {
-            super.onPrepareOptionsMenu ( menu );
-            if (mCurrentItemUri == null) {
-                MenuItem menuItem = menu.findItem ( R.id.action_delete );
-                menuItem.setVisible ( false );
-            }
-            return true;
-        }
+        getMenuInflater ().inflate ( R.menu.menu_editor, menu );
+        return true;
+    }
+
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
@@ -287,7 +279,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                                     NavUtils.navigateUpFromSameTask ( EditorActivity.this );
                                 }
                             };
-                    showUnsavedChangesDialog ( discardButtonClickListener );
+                        showUnsavedChangesDialog ( discardButtonClickListener );
                     return true;
             }
             return super.onOptionsItemSelected ( item );

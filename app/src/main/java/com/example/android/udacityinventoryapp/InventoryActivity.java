@@ -22,6 +22,7 @@ import android.app.LoaderManager;
 
 public class InventoryActivity  extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<Cursor>{
+    private static final int Product_Loader = 0;
     InventoryCursorAdapter mCursorAdapter;
 
     @Override
@@ -56,7 +57,7 @@ public class InventoryActivity  extends AppCompatActivity
                 startActivity ( intent );
             }
         } );
-        getLoaderManager ().initLoader ( 0,
+        getLoaderManager ().initLoader (  Product_Loader,
                 null, this);
     }
 
