@@ -24,7 +24,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(final View view, final Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
 
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
         final TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);

@@ -215,6 +215,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY, quantityString);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE, priceString);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME, supplierNameString);
+        values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_CAN_SELL, mCanSell);
         values.put(InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER, supplierPhoneNumberString);
 
          if (mCurrentItemUri == null) {
@@ -360,7 +361,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 mPriceEditText.setText ( price );
                 mSupplierNameEditText.setText ( supplier );
                 mQuantityEditText.setText ( Integer.toString ( quantity ) );
-                mSupplierPhoneNumberEditText.setText ( Integer.toString ( phone ) );
+                mSupplierPhoneNumberEditText.setText  ( Integer.toString ( phone ) );
 
                 switch (canSell) {
                     case InventoryContract.InventoryEntry.CAN_SELL_YES:

@@ -102,7 +102,7 @@ public class InventoryActivity  extends AppCompatActivity
         }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
                 InventoryContract.InventoryEntry._ID,
                 InventoryContract.InventoryEntry.COLUMN_ITEM_NAME,

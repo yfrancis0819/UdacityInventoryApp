@@ -55,12 +55,13 @@ public class InventoryProvider extends ContentProvider {
 
             case ITEM_ID:
                 selection = InventoryContract.InventoryEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                    selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
 
                 cursor = database.query(InventoryContract.InventoryEntry.TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
-            default:
+
+                default:
                 throw new IllegalArgumentException("Cannot query unknown URI " + uri);
         }
         cursor.setNotificationUri ( getContext ().getContentResolver (), uri );
@@ -129,53 +130,93 @@ public class InventoryProvider extends ContentProvider {
     }
 
     public int updateItem(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME)) {
+
             String name = values.getAsString(InventoryContract.InventoryEntry.COLUMN_ITEM_NAME);
+
             if (name == null) {
-                throw new IllegalArgumentException("Pet requires a name");
+
+                throw new IllegalArgumentException("Item requires a name");
             }
         }
 
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE)) {
-            Integer price = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE);
-            if (price != null && price <0) {
+
+            String price = values.getAsString(InventoryContract.InventoryEntry.COLUMN_ITEM_PRICE);
+            if (price == null) {
                 throw new IllegalArgumentException("Price requires valid amount");
             }
         }
 
         if (values.containsKey(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY)) {
+
             Integer quantity = values.getAsInteger(InventoryContract.InventoryEntry.COLUMN_ITEM_QUANTITY);
+
             if (quantity != null && quantity < 0) {
+
                 throw new IllegalArgumentException("Item requires valid quantity");
             }
         }
 
-        if (values.size() == 0) {
-            return 0;
+        if (values.containsKey (InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME)) {
+
+            String supplier = values.getAsString (InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_NAME);
+
+            if (supplier == null) {
+
+                throw new IllegalArgumentException ( "Item requires valid supplier" );
+            }
+        }
+
+        if (values.containsKey (InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER)) {
+
+            String phone = values.getAsString (InventoryContract.InventoryEntry.COLUMN_ITEM_SUPPLIER_PHONE_NUMBER);
+
+            if (phone == null) {
+
+                throw new IllegalArgumentException ( "Supplier requires valid phone number" );
+            }
         }
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        return database.update(InventoryContract.InventoryEntry.TABLE_NAME, values, selection, selectionArgs);
+        int rowsUpdated = database.update ( InventoryContract.InventoryEntry.TABLE_NAME, values, selection, selectionArgs );
+
+        if (rowsUpdated != 0) {
+            getContext ().getContentResolver ().notifyChange ( uri, null );
+        }
+        // Return the number of rows updated
+        return rowsUpdated;
     }
+
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        int rowsDeleted;
 
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case ITEMS:
-                return database.delete(InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete ( InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs );
+                break;
             case ITEM_ID:
                 // Delete a single row given by the ID in the URI
                 selection = InventoryContract.InventoryEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                return database.delete(InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete ( InventoryContract.InventoryEntry.TABLE_NAME, selection, selectionArgs );
+                break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
+
+        if (rowsDeleted != 0) {
+            getContext ().getContentResolver ().notifyChange ( uri, null );
+        }
+        // Return the number of rows deleted
+        return rowsDeleted;
     }
 
     @Override

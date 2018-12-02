@@ -45,7 +45,8 @@
             android:orientation="horizontal">
 
             <TextView
-                style="@style/CategoryStyle"/>
+                style="@style/CategoryStyle"
+                android:text="@string/action_insert_dummy_data"/>
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -61,23 +62,24 @@
 
                 <EditText
                     android:id="@+id/edit_item_price"
-                    android:hint="@string/editor_insert_item_failed"
                     style="@style/EditorFieldStyle"
                     android:layout_toEndOf="@id/label_price_symbol"
                     android:layout_toRightOf="@id/label_price_symbol"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:hint="@string/enter_price_of_item"/>
 
             </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/edit_quantity"
+            android:id="@+id/item_quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                style="@style/CategoryStyle"/>
+                style="@style/CategoryStyle"
+                android:text="@string/category_overview"/>
 
             <Button
                 android:id="@+id/decrement_button"
@@ -145,7 +147,7 @@
                 <EditText
                     android:id="@+id/edit_supplier_phone_number"
                     style="@style/EditorFieldStyle"
-                    android:hint=""
+                    android:hint="@string/enter_supplier_phone_number"
                     android:inputType="phone"/>
             </LinearLayout>
         </LinearLayout>
